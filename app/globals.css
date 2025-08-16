@@ -415,202 +415,241 @@
     animation-delay: 8.3s;
     animation-duration: 7.2s;
   }
+}
 
-  /* Enhanced float animation with better coverage and smoother movement */
-  @keyframes float {
-    0% {
-      transform: translateY(20px) translateX(0px) scale(0);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.9;
-      transform: translateX(15px) scale(1);
-    }
-    25% {
-      transform: translateY(-40px) translateX(-20px) scale(1.2);
-    }
-    50% {
-      transform: translateY(-80px) translateX(30px) scale(0.8);
-    }
-    75% {
-      transform: translateY(-120px) translateX(-25px) scale(1.1);
-    }
-    90% {
-      opacity: 0.9;
-      transform: translateY(-160px) translateX(10px) scale(1);
-    }
-    100% {
-      transform: translateY(-200px) translateX(0px) scale(0);
-      opacity: 0;
-    }
+/* Added tabs container styles */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* Updated tab buttons to have oval/rounded shape instead of square */
+.tab-button {
+  padding: 12px 24px;
+  border: none;
+  background: rgba(203, 161, 53, 0.1);
+  color: #cba135;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+  border-radius: 25px; /* Made tabs oval/rounded */
+  margin: 0 4px; /* Added spacing between oval tabs */
+  border: 1px solid rgba(203, 161, 53, 0.3); /* Added border for better definition */
+}
+
+.tab-button:hover {
+  background: rgba(203, 161, 53, 0.2);
+  transform: translateY(-2px);
+  border-color: rgba(203, 161, 53, 0.5); /* Enhanced border on hover */
+}
+
+.tab-button.active {
+  background: #cba135;
+  color: black;
+  border-color: #cba135; /* Updated border for active state */
+  box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3);
+}
+
+/* Added mobile-specific tab button styles for smaller screens */
+.tab-button-mobile {
+  padding: 10px 16px; /* Increased padding from 8px 12px */
+  border: none;
+  background: rgba(203, 161, 53, 0.1);
+  color: #cba135;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border-radius: 25px;
+  margin: 0 2px;
+  border: 1px solid rgba(203, 161, 53, 0.3);
+  font-size: 11px; /* تم تصغير الخط من 13px إلى 11px */
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.tab-button-mobile:hover {
+  background: rgba(203, 161, 53, 0.2);
+  transform: translateY(-1px);
+  border-color: rgba(203, 161, 53, 0.5);
+}
+
+.tab-button-mobile.active {
+  background: #cba135;
+  color: black;
+  border-color: #cba135;
+  box-shadow: 0 2px 8px rgba(203, 161, 53, 0.3);
+}
+
+/* Added responsive styles for mobile tabs with larger size */
+@media (max-width: 768px) {
+  .tab-button-mobile {
+    font-size: 10px; /* تم تصغير الخط من 12px إلى 10px */
+    padding: 8px 12px; /* Increased from 6px 8px */
   }
+}
 
-  /* Added Egyptian flag animation */
-  .egyptian-flag {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 60px;
-    height: 40px;
-    z-index: 10;
-    animation: wave 3s ease-in-out infinite;
-    transform-origin: left center;
+.tab-content {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Enhanced float animation with better coverage and smoother movement */
+@keyframes float {
+  0% {
+    transform: translateY(20px) translateX(0px) scale(0);
+    opacity: 0;
   }
-
-  @keyframes wave {
-    0%,
-    100% {
-      transform: rotate(0deg);
-    }
-    25% {
-      transform: rotate(5deg);
-    }
-    75% {
-      transform: rotate(-5deg);
-    }
+  10% {
+    opacity: 0.9;
+    transform: translateX(15px) scale(1);
   }
-
-  /* Justice scale logo styles */
-  .justice-logo {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    z-index: 10;
-    /* Updated logo color to #cba135 gold */
-    color: #cba135;
-    animation: glow 2s ease-in-out infinite alternate;
+  25% {
+    transform: translateY(-40px) translateX(-20px) scale(1.2);
   }
-
-  /* Enhanced glow animation with #cba135 gold */
-  @keyframes glow {
-    from {
-      filter: drop-shadow(0 0 5px rgba(203, 161, 53, 0.5));
-    }
-    to {
-      filter: drop-shadow(0 0 15px rgba(203, 161, 53, 0.8));
-    }
+  50% {
+    transform: translateY(-80px) translateX(30px) scale(0.8);
   }
-
-  /* Added language switcher styles */
-  .language-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 20;
-    display: flex;
-    gap: 8px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 8px;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
+  75% {
+    transform: translateY(-120px) translateX(-25px) scale(1.1);
   }
-
-  .language-button {
-    padding: 6px 12px;
-    border: 1px solid #cba135;
-    background: transparent;
-    color: #cba135;
-    border-radius: 4px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  90% {
+    opacity: 0.9;
+    transform: translateY(-160px) translateX(10px) scale(1);
   }
-
-  .language-button:hover {
-    background: #cba135;
-    color: black;
+  100% {
+    transform: translateY(-200px) translateX(0px) scale(0);
+    opacity: 0;
   }
+}
 
-  .language-button.active {
-    background: #cba135;
-    color: black;
+/* Added Egyptian flag animation */
+.egyptian-flag {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 40px;
+  z-index: 10;
+  animation: wave 3s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
   }
-
-  /* Added tabs container styles */
-  .tabs-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
+  25% {
+    transform: rotate(5deg);
   }
-
-  /* Updated tab buttons to have oval/rounded shape instead of square */
-  .tab-button {
-    padding: 12px 24px;
-    border: none;
-    background: rgba(203, 161, 53, 0.1);
-    color: #cba135;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-    font-weight: 500;
-    border-radius: 25px; /* Made tabs oval/rounded */
-    margin: 0 4px; /* Added spacing between oval tabs */
-    border: 1px solid rgba(203, 161, 53, 0.3); /* Added border for better definition */
+  75% {
+    transform: rotate(-5deg);
   }
+}
 
-  .tab-button:hover {
-    background: rgba(203, 161, 53, 0.2);
-    transform: translateY(-2px);
-    border-color: rgba(203, 161, 53, 0.5); /* Enhanced border on hover */
+/* Justice scale logo styles */
+.justice-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  z-index: 10;
+  /* Updated logo color to #cba135 gold */
+  color: #cba135;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Enhanced glow animation with #cba135 gold */
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 5px rgba(203, 161, 53, 0.5));
   }
-
-  .tab-button.active {
-    background: #cba135;
-    color: black;
-    border-color: #cba135; /* Updated border for active state */
-    box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3);
+  to {
+    filter: drop-shadow(0 0 15px rgba(203, 161, 53, 0.8));
   }
+}
 
-  .tab-content {
-    animation: fadeIn 0.5s ease-in-out;
+/* Added language switcher styles */
+.language-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.language-button {
+  padding: 6px 12px;
+  border: 1px solid #cba135;
+  background: transparent;
+  color: #cba135;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-button:hover {
+  background: #cba135;
+  color: black;
+}
+
+.language-button.active {
+  background: #cba135;
+  color: black;
+}
+
+/* Added hover glow effect for cards and buttons */
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  /* Updated hover glow to use #cba135 gold */
+  box-shadow: 0 0 20px rgba(203, 161, 53, 0.3);
+}
+
+/* Added shadow-3xl utility for enhanced shadows */
+.shadow-3xl {
+  /* Enhanced shadow with #cba135 gold tint */
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(203, 161, 53, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-
-  /* Added hover glow effect for cards and buttons */
-  .hover-glow {
-    transition: all 0.3s ease;
+  to {
+    opacity: 1;
   }
+}
 
-  .hover-glow:hover {
-    /* Updated hover glow to use #cba135 gold */
-    box-shadow: 0 0 20px rgba(203, 161, 53, 0.3);
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-
-  /* Added shadow-3xl utility for enhanced shadows */
-  .shadow-3xl {
-    /* Enhanced shadow with #cba135 gold tint */
-    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(203, 161, 53, 0.1);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

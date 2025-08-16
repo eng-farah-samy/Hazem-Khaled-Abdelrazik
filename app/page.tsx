@@ -294,30 +294,30 @@ export default function LawyerWebsite() {
           </Card>
 
           <div className="tabs-container mb-8">
-            <div className="flex flex-wrap gap-0">
+            <div className="flex flex-wrap gap-1 justify-center">
               <button
-                className={`tab-button ${activeTab === "about" ? "active" : ""}`}
+                className={`tab-button-mobile ${activeTab === "about" ? "active" : ""}`}
                 onClick={() => setActiveTab("about")}
               >
-                {t.aboutMe}
+                نبذة
               </button>
               <button
-                className={`tab-button ${activeTab === "experience" ? "active" : ""}`}
+                className={`tab-button-mobile ${activeTab === "experience" ? "active" : ""}`}
                 onClick={() => setActiveTab("experience")}
               >
-                {t.experience}
+                الخبرة
               </button>
               <button
-                className={`tab-button ${activeTab === "certificates" ? "active" : ""}`}
+                className={`tab-button-mobile ${activeTab === "certificates" ? "active" : ""}`}
                 onClick={() => setActiveTab("certificates")}
               >
-                {t.certificates}
+                الشهادات
               </button>
               <button
-                className={`tab-button ${activeTab === "news" ? "active" : ""}`}
+                className={`tab-button-mobile ${activeTab === "news" ? "active" : ""}`}
                 onClick={() => setActiveTab("news")}
               >
-                {t.news}
+                الأخبار
               </button>
             </div>
           </div>
@@ -368,7 +368,7 @@ export default function LawyerWebsite() {
                 <p className="text-muted-foreground mb-6 leading-relaxed">{t.subtitle}</p>
 
                 <div className="space-y-2 mb-6 text-sm">
-                  <div className="flex items-center justify-center gap-2 text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground" dir="ltr">
                     <Phone className="w-4 h-4 text-accent" />
                     <span>{t.phone}</span>
                   </div>
