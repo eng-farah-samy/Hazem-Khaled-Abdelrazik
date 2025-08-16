@@ -454,7 +454,7 @@
 
 /* Added mobile-specific tab button styles for smaller screens */
 .tab-button-mobile {
-  padding: 10px 16px; /* Increased padding from 8px 12px */
+  padding: 12px 18px; /* Increased padding from 10px 16px */
   border: none;
   background: rgba(203, 161, 53, 0.1);
   color: #cba135;
@@ -468,18 +468,25 @@
   flex: 1;
   min-width: 0;
   text-align: center;
+  /* إضافة خصائص لمنع خروج النص من التابس */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tab-button-mobile:hover {
   background: rgba(203, 161, 53, 0.2);
   transform: translateY(-1px);
-  border-color: rgba(203, 161, 53, 0.5);
+  border-color: rgba(203, 161, 53, 0.5); /* Enhanced border on hover */
 }
 
 .tab-button-mobile.active {
   background: #cba135;
   color: black;
-  border-color: #cba135;
+  border-color: #cba135; /* Updated border for active state */
   box-shadow: 0 2px 8px rgba(203, 161, 53, 0.3);
 }
 
@@ -487,7 +494,10 @@
 @media (max-width: 768px) {
   .tab-button-mobile {
     font-size: 10px; /* تم تصغير الخط من 12px إلى 10px */
-    padding: 8px 12px; /* Increased from 6px 8px */
+    padding: 10px 14px; /* Increased from 8px 12px */
+    /* تحسين المحاذاة للشاشات الصغيرة */
+    min-width: 70px;
+    max-width: 80px;
   }
 }
 

@@ -19,6 +19,9 @@ import {
   ExternalLink,
   Scale,
   Check,
+  Mail,
+  Linkedin,
+  UserPlus,
 } from "lucide-react"
 import Image from "next/image"
 
@@ -31,7 +34,8 @@ export default function LawyerWebsite() {
     title: "المستشار / حازم خالد عبد الرازق",
     subtitle: "ماجستير القانون العام والخاص",
     phone: "+20 11 28837666",
-    email: "hazem.lawyer@email.com",
+    phone2: "0127 1314082",
+    email: "hazem.lawyer@gmail.com",
     location: "الإسكندرية، مصر",
     paymentMethods: "طرق الدفع",
     viewProfile: "عرض الملف الشخصي",
@@ -42,6 +46,7 @@ export default function LawyerWebsite() {
     certificates: "الشهادات والمؤهلات",
     news: "الأخبار والمقالات",
     copyright: "© 2025 المستشار حازم خالد عبد الرازق. جميع الحقوق محفوظة.",
+    addContact: "إضافة جهة اتصال",
   }
 
   const socialLinks = [
@@ -58,11 +63,34 @@ export default function LawyerWebsite() {
       href: "https://www.instagram.com/hazemkhaledabdelrazik/",
       color: "bg-pink-600",
     },
+    {
+      icon: Mail,
+      label: "إيميل",
+      href: `mailto:${t.email}`,
+      color: "bg-red-600",
+    },
+    {
+      icon: Linkedin,
+      label: "لينكدإن",
+      href: "https://linkedin.com/in/hazem-khaled-lawyer",
+      color: "bg-blue-700",
+    },
   ]
 
   const paymentLinks = [
-    { icon: CreditCard, label: "إنستا باي", href: "#" },
-    { icon: Wallet, label: "اتصالات كاش", number: "+20 11 28837666", isCopyable: true },
+    {
+      icon: CreditCard,
+      label: "إنستا باي",
+      href: "#",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png",
+    },
+    {
+      icon: Wallet,
+      label: "اتصالات كاش",
+      number: "+20 11 28837666",
+      isCopyable: true,
+      logo: "https://img.utdstc.com/icon/7ae/68e/7ae68e49c475987f4f59529ea31705cdd1967caaf850cd396d8cf942ade275ba:200",
+    },
   ]
 
   const copyToClipboard = async (text: string, label: string) => {
@@ -73,6 +101,32 @@ export default function LawyerWebsite() {
     } catch (err) {
       console.error("Failed to copy: ", err)
     }
+  }
+
+  const generateVCard = () => {
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${t.title}
+ORG:محامي ومستشار قانوني
+TEL;TYPE=CELL:${t.phone}
+TEL;TYPE=WORK:${t.phone2}
+EMAIL:${t.email}
+URL:https://www.facebook.com/rane.rone76?locale=ar_AR
+URL:https://www.instagram.com/hazemkhaledabdelrazik/
+URL:https://linkedin.com/in/hazem-khaled-lawyer
+ADR;TYPE=WORK:;;${t.location};;;;
+NOTE:${t.subtitle} - متخصص في القانون الجنائي والتجاري
+END:VCARD`
+
+    const blob = new Blob([vcard], { type: "text/vcard" })
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.href = url
+    link.download = "حازم_خالد_عبد_الرازق_المحامي.vcf"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
   }
 
   const newsItems = [
@@ -373,12 +427,18 @@ export default function LawyerWebsite() {
                     <span>{t.phone}</span>
                   </div>
                   <div className="flex items-center justify-center gap-2 text-muted-foreground">
+                    <Mail className="w-4 h-4 text-accent" />
+                    <a href={`mailto:${t.email}`} className="hover:text-accent transition-colors">
+                      {t.email}
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground">
                     <MapPin className="w-4 h-4 text-accent" />
                     <span>{t.location}</span>
                   </div>
                 </div>
 
-                <div className="flex justify-center gap-3 mb-6">
+                <div className="flex justify-center gap-2 mb-6 flex-wrap">
                   {socialLinks.map((link, index) => (
                     <Button
                       key={index}
@@ -393,6 +453,18 @@ export default function LawyerWebsite() {
                   ))}
                 </div>
 
+                <div className="mb-6">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2 border-accent text-accent hover:bg-accent hover:text-black transition-colors bg-transparent hover-glow mx-auto"
+                    onClick={generateVCard}
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    <span className="text-xs">{t.addContact}</span>
+                  </Button>
+                </div>
+
                 <div className="space-y-3 mb-6">
                   <h3 className="text-sm font-semibold text-accent">{t.paymentMethods}</h3>
                   <div className="flex justify-center gap-3">
@@ -404,14 +476,15 @@ export default function LawyerWebsite() {
                         className="flex items-center gap-2 border-accent text-accent hover:bg-accent hover:text-black transition-colors bg-transparent hover-glow"
                         onClick={() => payment.isCopyable && copyToClipboard(payment.number!, payment.label)}
                       >
-                        {copiedItem === payment.label ? (
-                          <Check className="w-4 h-4" />
-                        ) : (
-                          <payment.icon className="w-4 h-4" />
-                        )}
-                        <span className="text-xs">
-                          {copiedItem === payment.label ? "تم نسخ رقم المحفظة" : payment.label}
-                        </span>
+                        <Image
+                          src={payment.logo || "/placeholder.svg"}
+                          alt={payment.label}
+                          width={16}
+                          height={16}
+                          className="object-contain"
+                        />
+                        {copiedItem === payment.label ? <Check className="w-4 h-4" /> : null}
+                        <span className="text-xs">{copiedItem === payment.label ? "تم النسخ" : payment.label}</span>
                       </Button>
                     ))}
                   </div>
