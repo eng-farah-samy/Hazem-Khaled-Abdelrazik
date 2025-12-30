@@ -13,29 +13,28 @@ import {
   User,
   Award,
   Briefcase,
-  Newspaper,
   Phone,
   MapPin,
-  ExternalLink,
   Scale,
   Check,
   Mail,
   Linkedin,
   UserPlus,
+  GraduationCap,
 } from "lucide-react"
 import Image from "next/image"
 
 export default function LawyerWebsite() {
   const [currentPage, setCurrentPage] = useState<"home" | "portfolio">("home")
-  const [activeTab, setActiveTab] = useState<"about" | "experience" | "certificates" | "news">("about")
+  const [activeTab, setActiveTab] = useState<"about" | "experience" | "certificates">("about")
   const [copiedItem, setCopiedItem] = useState<string | null>(null)
 
   const t = {
-    title: "المستشار / حازم خالد عبد الرازق",
-    subtitle: "ماجستير القانون العام والخاص",
+    name: "المستشار / حازم خالد عبد الرازق",
+    title: "ماجستير في القانون العام والخاص",
+    specialization: "متخصص في القانون الجنائي والتجاري",
     phone: "+20 11 28837666",
-    phone2: "0127 1314082",
-    email: "hazem.lawyer@gmail.com",
+    email: "hazemkhaledabdelrazik@gmail.com",
     location: "الإسكندرية، مصر",
     paymentMethods: "طرق الدفع",
     viewProfile: "عرض الملف الشخصي",
@@ -44,9 +43,7 @@ export default function LawyerWebsite() {
     aboutMe: "نبذة عني",
     experience: "الخبرة المهنية",
     certificates: "الشهادات والمؤهلات",
-    news: "الأخبار والمقالات",
     copyright: "© 2025 المستشار حازم خالد عبد الرازق. جميع الحقوق محفوظة.",
-    addContact: "إضافة جهة اتصال",
   }
 
   const socialLinks = [
@@ -103,19 +100,19 @@ export default function LawyerWebsite() {
     }
   }
 
-  const generateVCard = () => {
+  const downloadVCard = () => {
     const vcard = `BEGIN:VCARD
 VERSION:3.0
-FN:${t.title}
+FN:${t.name}
 ORG:محامي ومستشار قانوني
+TITLE:${t.title}
 TEL;TYPE=CELL:${t.phone}
-TEL;TYPE=WORK:${t.phone2}
 EMAIL:${t.email}
 URL:https://www.facebook.com/rane.rone76?locale=ar_AR
 URL:https://www.instagram.com/hazemkhaledabdelrazik/
 URL:https://linkedin.com/in/hazem-khaled-lawyer
 ADR;TYPE=WORK:;;${t.location};;;;
-NOTE:${t.subtitle} - متخصص في القانون الجنائي والتجاري
+NOTE:${t.specialization}
 END:VCARD`
 
     const blob = new Blob([vcard], { type: "text/vcard" })
@@ -128,30 +125,6 @@ END:VCARD`
     document.body.removeChild(link)
     window.URL.revokeObjectURL(url)
   }
-
-  const newsItems = [
-    {
-      id: 1,
-      title: "تطورات جديدة في قانون الأحوال الشخصية",
-      summary: "آخر التحديثات والتعديلات في قانون الأحوال الشخصية وتأثيرها على المواطنين",
-      image: "/placeholder-4i03s.png",
-      date: "2024-01-15",
-    },
-    {
-      id: 2,
-      title: "حقوق المستهلك في القانون المصري",
-      summary: "دليل شامل لحقوق المستهلك وكيفية حمايتها قانونياً",
-      image: "/consumer-rights-protection.png",
-      date: "2024-01-10",
-    },
-    {
-      id: 3,
-      title: "التحكيم التجاري والمنازعات",
-      summary: "أهمية التحكيم في حل المنازعات التجارية وإجراءاته",
-      image: "/placeholder-hy2dg.png",
-      date: "2024-01-05",
-    },
-  ]
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -207,65 +180,37 @@ END:VCARD`
                 <Award className="w-6 h-6 text-accent" />
                 <h3 className="text-xl font-semibold text-accent">{t.certificates}</h3>
               </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-muted/50 p-4 rounded-lg hover:shadow-md transition-shadow border border-accent/10">
-                  <h4 className="font-semibold mb-2">ماجستير القانون العام والخاص</h4>
-                  <p className="text-muted-foreground text-sm">جامعة مدينة السادات</p>
-                  <p className="text-accent text-sm">2024</p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors hover-glow">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-accent mb-1">ليسانس حقوق</h4>
+                    <p className="text-sm text-muted-foreground mb-1">جامعة الإسكندرية</p>
+                    <p className="text-xs text-muted-foreground">2016 - 2019 | تقدير عام: جيد</p>
+                  </div>
                 </div>
-                <div className="bg-muted/50 p-4 rounded-lg hover:shadow-md transition-shadow border border-accent/10">
-                  <h4 className="font-semibold mb-2">ليسانس الحقوق</h4>
-                  <p className="text-muted-foreground text-sm">جامعة الإسكندرية - بتقدير عام جيد</p>
-                  <p className="text-accent text-sm">2016 - 2019</p>
+                <div className="flex items-start gap-4 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors hover-glow">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <Award className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-accent mb-1">ماجستير في القانون العام والخاص</h4>
+                    <p className="text-sm text-muted-foreground mb-1">جامعة مدينة السادات</p>
+                    <p className="text-xs text-muted-foreground">2024</p>
+                  </div>
                 </div>
-                <div className="bg-muted/50 p-4 rounded-lg hover:shadow-md transition-shadow border border-accent/10">
-                  <h4 className="font-semibold mb-2">عضوية نقابة المحامين</h4>
-                  <p className="text-muted-foreground text-sm">نقابة المحامين المصرية</p>
-                  <p className="text-accent text-sm">2019</p>
+                <div className="flex items-start gap-4 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors hover-glow">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <Scale className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-accent mb-1">عضوية نقابة المحامين</h4>
+                    <p className="text-sm text-muted-foreground mb-1">نقابة المحامين المصرية</p>
+                    <p className="text-xs text-muted-foreground">منذ 2019</p>
+                  </div>
                 </div>
-                <div className="bg-muted/50 p-4 rounded-lg hover:shadow-md transition-shadow border border-accent/10">
-                  <h4 className="font-semibold mb-2">تخصص القانون الجنائي</h4>
-                  <p className="text-muted-foreground text-sm">متخصص في القضايا الجنائية والتجارية</p>
-                  <p className="text-accent text-sm">خبرة 5 سنوات</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )
-      case "news":
-        return (
-          <Card className="animate-slide-up bg-card/90 backdrop-blur-sm border-accent/20 hover-glow">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Newspaper className="w-6 h-6 text-accent" />
-                <h3 className="text-xl font-semibold text-accent">{t.news}</h3>
-              </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {newsItems.map((item) => (
-                  <Card
-                    key={item.id}
-                    className="hover:shadow-lg transition-shadow cursor-pointer bg-card/90 backdrop-blur-sm border-accent/20 hover:border-accent/40 hover-glow"
-                  >
-                    <div className="relative h-48 overflow-hidden rounded-t-lg">
-                      <Image
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.title}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2 line-clamp-2">{item.title}</h4>
-                      <p className="text-muted-foreground text-sm mb-3 line-clamp-3">{item.summary}</p>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-accent">{item.date}</span>
-                        <Button size="sm" variant="ghost" className="p-1 text-accent hover:bg-accent hover:text-black">
-                          <ExternalLink className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
               </div>
             </CardContent>
           </Card>
@@ -304,16 +249,16 @@ END:VCARD`
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="relative">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-08-16%20160119-EAK23OwH3ruMnECtFTT9UEmFori2pO.png"
-                    alt={t.title}
+                    src="/images/screenshot-202025-08-16-20160119.png"
+                    alt={t.name}
                     width={150}
                     height={150}
                     className="rounded-full border-4 border-accent shadow-lg shadow-accent/20"
                   />
                 </div>
                 <div className="text-center md:text-right flex-1">
-                  <h2 className="text-2xl font-bold mb-2 text-accent">{t.title}</h2>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{t.subtitle}</p>
+                  <h2 className="text-2xl font-bold mb-2 text-accent">{t.name}</h2>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">{t.specialization}</p>
                   <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                     <Badge variant="secondary" className="bg-accent/20 text-accent border-accent/30">
                       قانون جنائي
@@ -367,12 +312,6 @@ END:VCARD`
               >
                 الشهادات
               </button>
-              <button
-                className={`tab-button-mobile ${activeTab === "news" ? "active" : ""}`}
-                onClick={() => setActiveTab("news")}
-              >
-                الأخبار
-              </button>
             </div>
           </div>
 
@@ -399,8 +338,8 @@ END:VCARD`
           <div className="relative">
             <div className="w-32 h-32 rounded-full border-4 border-accent shadow-2xl shadow-accent/30 overflow-hidden bg-black hover-glow">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-08-16%20160119-EAK23OwH3ruMnECtFTT9UEmFori2pO.png"
-                alt={t.title}
+                src="/images/screenshot-202025-08-16-20160119.png"
+                alt={t.name}
                 width={128}
                 height={128}
                 className="w-full h-full object-cover"
@@ -418,8 +357,8 @@ END:VCARD`
               <div className="h-2 bg-gradient-to-r from-transparent via-accent to-transparent shadow-lg"></div>
 
               <div className="p-6 pt-20 text-center">
-                <h1 className="text-2xl font-bold mb-2 text-accent">{t.title}</h1>
-                <p className="text-muted-foreground mb-6 leading-relaxed">{t.subtitle}</p>
+                <h1 className="text-2xl font-bold mb-2 text-accent">{t.name}</h1>
+                <p className="text-muted-foreground mb-6 leading-relaxed">{t.specialization}</p>
 
                 <div className="space-y-2 mb-6 text-sm">
                   <div className="flex items-center justify-center gap-2 text-muted-foreground" dir="ltr">
@@ -458,10 +397,10 @@ END:VCARD`
                     variant="outline"
                     size="sm"
                     className="flex items-center gap-2 border-accent text-accent hover:bg-accent hover:text-black transition-colors bg-transparent hover-glow mx-auto"
-                    onClick={generateVCard}
+                    onClick={downloadVCard}
                   >
                     <UserPlus className="w-4 h-4" />
-                    <span className="text-xs">{t.addContact}</span>
+                    <span className="text-xs">{t.viewProfile}</span>
                   </Button>
                 </div>
 
